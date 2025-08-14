@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block main %}
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <div class="flex flex-col m-auto h-screen space-y-8 w-1/2 py-10">
+    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg">
+      <p class="text-gray-500 dark:text-gray-400">
+        With Pixtale, you can get videos of your trips narrated by GeminiAI!
+        Before all of that magic, please upload a zip file of the folder of all
+        your trip photos and videos. Or you could also just select your Google Photos album and your media items (only the first 10 media
+        items) will be fetched from that. A max of 10 photos and videos is
+        recommended. iPhone photos and videos work best because they have GPS data on them by default.
+      </p>
+    </div>
+
+    <input
+      class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+      name="zip_file"
+      type="file"
+    />
+
+    <div class="flex items-center">
+      <div class="border-b border-gray-400 w-full"></div>
+      <div class="mx-2 text-gray-500">OR</div>
+      <div class="border-b border-gray-400 w-full"></div>
+    </div>
+
+    <div class="">
+  
+     <select
+          name="album"
+          id="album"
+          class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+        >
+
+          <option selected>Select from your Google Photos Album</option>
+          {% for album in albums %}
+
+        
+
+          <option value="{{album}}">{{album.title}}</option>
+
+          {% endfor %}
+        </select>
+    </div>
+
+    <p id="error-message" class="text-red-500 text-sm">{{ error }}</p>
+
+    <input
+      type="submit"
+      value="Submit"
+      class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-28 py-3.5 mx-auto text-center"
+    />
+  </div>
+</form>
+
+{% endblock %}
